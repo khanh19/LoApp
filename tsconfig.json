@@ -1,11 +1,10 @@
 {
-  "extends": ["expo/tsconfig.base","@react-native/typescript-config"],
+  "extends": ["expo/tsconfig.base", "@react-native/typescript-config"],
   "compilerOptions": {
     "strict": true,
+    "module": "esnext",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     }
   },
   "include": [
