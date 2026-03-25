@@ -1,6 +1,6 @@
 import { Stack } from "expo-router";
 
-import { setupReactotron } from "@/lib/reactotron";
+import { setupReactotron } from "@/src/lib/reactotron";
 
 import { QueryProvider } from "./providers/QueryProvider";
 
