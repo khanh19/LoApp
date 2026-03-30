@@ -2,15 +2,19 @@
   "extends": ["expo/tsconfig.base", "@react-native/typescript-config"],
   "compilerOptions": {
     "strict": true,
+    "skipLibCheck": true,
+    "jsx": "react-native",
     "module": "esnext",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/screens/*": ["./src/screens/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/data/*": ["./src/data/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/constants": ["./src/constants.ts"],
+      "@/theme": ["./src/tamagui.config.ts"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }

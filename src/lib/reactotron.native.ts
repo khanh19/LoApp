@@ -5,10 +5,6 @@ import { queryClient } from "./query-client";
 
 let didConnect = false;
 
-/**
- * Call once at startup (e.g. root layout). Opens a socket to the Reactotron desktop app.
- * @see https://docs.infinite.red/reactotron/
- */
 export function setupReactotron(): void {
   if (!__DEV__ || didConnect) return;
   didConnect = true;
