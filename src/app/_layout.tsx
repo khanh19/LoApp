@@ -14,7 +14,10 @@ export default function RootLayout() {
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
       <QueryProvider>
-        <Stack screenOptions={{ headerShown: false }} />
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="tabs" options={{ headerShown: false }} />
+        </Stack>
       </QueryProvider>
     </TamaguiProvider>
   );
