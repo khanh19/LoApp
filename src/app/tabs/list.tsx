@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export default function HomeScreen() {
+export default function ListScreen() {
   return (
     <View style={styles.root}>
-      <Text style={styles.title}>Hello Khanh</Text>
+      <Text style={styles.title}>Map</Text>
+      <Text style={styles.sub}>Tab content goes here.</Text>
     </View>
   );
 }
@@ -14,10 +15,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
+    padding: 24,
   },
   title: {
-    fontSize: 20,
-    fontWeight: "600",
+    fontSize: 22,
+    fontWeight: "700",
     color: "#111827",
+    marginBottom: 8,
+  },
+  sub: {
+    fontSize: 15,
+    color: "#64748b",
+    textAlign: "center",
   },
 });

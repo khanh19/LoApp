@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export default function ExploreScreen() {
+export default function MapScreen() {
   return (
     <View style={styles.root}>
-      <Text style={styles.title}>Discover</Text>
+      <Text style={styles.title}>Map</Text>
       <Text style={styles.sub}>Tab content goes here.</Text>
     </View>
   );
