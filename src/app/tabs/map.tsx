@@ -1,29 +1,31 @@
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function MapScreen() {
+import { TabScreenChrome } from "../../components/header";
+
+export default function MapTab() {
   return (
-    <View style={styles.root}>
-      <Text style={styles.title}>Map</Text>
-      <Text style={styles.sub}>Tab content goes here.</Text>
-    </View>
+    <TabScreenChrome
+      header={{
+        variant: "centered",
+        title: "Map",
+      }}
+    >
+      <View style={styles.body}>
+        <Text style={styles.placeholder}>Map content goes here.</Text>
+      </View>
+    </TabScreenChrome>
   );
 }
 
 const styles = StyleSheet.create({
-  root: {
+  body: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
     padding: 24,
   },
-  title: {
-    fontSize: 22,
-    fontWeight: "700",
-    color: "#111827",
-    marginBottom: 8,
-  },
-  sub: {
+  placeholder: {
     fontSize: 15,
     color: "#64748b",
     textAlign: "center",

@@ -1,23 +1,45 @@
-import { StyleSheet, Text, View } from "react-native";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import React from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { HomeTopBar, SearchBar } from "../../components/header";
 
-export default function HomeScreen() {
+export default function HomeTab() {
+  const tabBarHeight = useBottomTabBarHeight();
+
   return (
-    <View style={styles.root}>
-      <Text style={styles.title}>Hello Khanh</Text>
-    </View>
+    <SafeAreaView style={styles.safe} edges={["top"]}>
+      <View style={styles.header}>
+        <HomeTopBar />
+        <View style={styles.searchWrap}>
+          <SearchBar />
+        </View>
+      </View>
+
+      <ScrollView
+        style={styles.scroll}
+        contentContainerStyle={{ paddingBottom: tabBarHeight + 16 }}
+        showsVerticalScrollIndicator={false}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  root: {
+  safe: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#fff",
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "600",
-    color: "#111827",
+  header: {
+    backgroundColor: "#fff",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: "rgba(15, 23, 42, 0.07)",
+    paddingBottom: 12,
+  },
+  searchWrap: {
+    paddingHorizontal: 20,
+  },
+  scroll: {
+    flex: 1,
   },
 });

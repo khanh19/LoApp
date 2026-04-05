@@ -1,29 +1,39 @@
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function ExploreScreen() {
+import { HeaderIconButton, TabScreenChrome } from "../../components/header";
+
+export default function ExploreTab() {
   return (
-    <View style={styles.root}>
-      <Text style={styles.title}>Discover</Text>
-      <Text style={styles.sub}>Tab content goes here.</Text>
-    </View>
+    <TabScreenChrome
+      header={{
+        variant: "inline",
+        title: "Explore",
+        subtitle: "Trending near you",
+        right: (
+          <HeaderIconButton
+            name="options-outline"
+            accessibilityLabel="Filters and sort"
+            onPress={() => undefined}
+          />
+        ),
+      }}
+    >
+      <View style={styles.body}>
+        <Text style={styles.placeholder}>Discover feed goes here.</Text>
+      </View>
+    </TabScreenChrome>
   );
 }
 
 const styles = StyleSheet.create({
-  root: {
+  body: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
     padding: 24,
   },
-  title: {
-    fontSize: 22,
-    fontWeight: "700",
-    color: "#111827",
-    marginBottom: 8,
-  },
-  sub: {
+  placeholder: {
     fontSize: 15,
     color: "#64748b",
     textAlign: "center",

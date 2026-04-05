@@ -1,14 +1,16 @@
 import { useRouter } from "expo-router";
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import OnboardingScreen from "../screens/OnboardingScreen";
 import SplashScreen from "../screens/SplashScreen";
+import WelcomeScreen from "../screens/WelcomeScreen";
 
-type Phase = "splash" | "onboarding";
+type Phase = "splash" | "welcome" | "onboarding";
 
 export default function Index() {
   const router = useRouter();
   const [phase, setPhase] = useState<Phase>("splash");
+  const goWelcome = useCallback(() => setPhase("welcome"), []);
   const goOnboarding = useCallback(() => setPhase("onboarding"), []);
   const goHome = useCallback(() => {
     router.replace("/tabs");
@@ -16,7 +18,9 @@ export default function Index() {
 
   switch (phase) {
     case "splash":
-      return <SplashScreen onFinished={goOnboarding} />;
+      return <SplashScreen onFinished={goWelcome} />;
+    case "welcome":
+      return <WelcomeScreen onGetStarted={goOnboarding} />;
     case "onboarding":
       return <OnboardingScreen onFinished={goHome} />;
   }

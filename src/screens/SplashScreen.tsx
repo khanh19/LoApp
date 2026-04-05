@@ -1,5 +1,5 @@
 import { SplashScreen as ExpoSplashScreen } from "expo-router";
-import { useEffect, type ComponentType, type ReactNode } from "react";
+import React, { useEffect, type ComponentType, type ReactNode } from "react";
 import {
   StyleSheet,
   Text,

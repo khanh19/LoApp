@@ -2,8 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import * as SystemUI from "expo-system-ui";
-import type { ComponentProps } from "react";
-import { useLayoutEffect, useState } from "react";
+import React, { type ComponentProps, useLayoutEffect, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
