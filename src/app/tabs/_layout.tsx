@@ -1,4 +1,5 @@
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import React from "react";
+import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 
 import { FloatingTabBar } from "../../components/navigation/FloatingTabBar";
@@ -9,13 +10,11 @@ export default function TabLayout() {
       tabBar={(props) => <FloatingTabBar {...props} />}
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "#111827",
-        tabBarInactiveTintColor: "#94a3b8",
+        tabBarActiveTintColor: "#0f172b",
+        tabBarInactiveTintColor: "#90a1b9",
         tabBarShowLabel: false,
-        // Custom `tabBar` ignores this layout; height is used by `getTabBarHeight`
-        // until `FloatingTabBar` reports its real size via `onLayout`.
         tabBarStyle: {
-          height: 128,
+          height: 120,
           backgroundColor: "transparent",
           borderTopWidth: 0,
           elevation: 0,
@@ -26,10 +25,10 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color, focused, size }) => (
+          tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name={focused ? "home" : "home-outline"}
-              size={size}
+              size={24}
               color={color}
             />
           ),
@@ -38,11 +37,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="explore"
         options={{
-          title: "Explore",
-          tabBarIcon: ({ color, focused, size }) => (
+          title: "Discover",
+          tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name={focused ? "compass" : "compass-outline"}
-              size={size}
+              size={24}
               color={color}
             />
           ),
@@ -52,10 +51,10 @@ export default function TabLayout() {
         name="map"
         options={{
           title: "Map",
-          tabBarIcon: ({ color, focused, size }) => (
+          tabBarIcon: ({ color, focused }) => (
             <Ionicons
-              name={focused ? "map" : "map-outline"}
-              size={size}
+              name={focused ? "location" : "location-outline"}
+              size={24}
               color={color}
             />
           ),
@@ -65,26 +64,20 @@ export default function TabLayout() {
         name="list"
         options={{
           title: "List",
-          tabBarIcon: ({ color, focused, size }) => (
+          tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name={focused ? "list" : "list-outline"}
-              size={size}
+              size={24}
               color={color}
             />
           ),
         }}
       />
+      {/* Profile is accessible via the home screen, not the tab bar */}
       <Tabs.Screen
         name="profile"
         options={{
-          title: "Profile",
-          tabBarIcon: ({ color, focused, size }) => (
-            <MaterialCommunityIcons
-              name={focused ? "account" : "account-outline"}
-              size={size}
-              color={color}
-            />
-          ),
+          href: null,
         }}
       />
     </Tabs>
