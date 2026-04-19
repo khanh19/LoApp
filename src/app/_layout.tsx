@@ -9,6 +9,7 @@ import { SplashScreen, Stack } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { TamaguiProvider } from "tamagui";
 
+import { AuthProvider } from "../lib/auth/AuthContext";
 import { LocationProvider } from "../lib/context/LocationContext";
 import { setupReactotron } from "../lib/reactotron";
 import tamaguiConfig from "../tamagui.config";
@@ -31,14 +32,16 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
         <QueryProvider>
-          <LocationProvider>
-            <BottomSheetModalProvider>
-              <Stack screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="index" options={{ headerShown: false }} />
-                <Stack.Screen name="tabs" options={{ headerShown: false }} />
-              </Stack>
-            </BottomSheetModalProvider>
-          </LocationProvider>
+          <AuthProvider>
+            <LocationProvider>
+              <BottomSheetModalProvider>
+                <Stack screenOptions={{ headerShown: false }}>
+                  <Stack.Screen name="index" options={{ headerShown: false }} />
+                  <Stack.Screen name="tabs" options={{ headerShown: false }} />
+                </Stack>
+              </BottomSheetModalProvider>
+            </LocationProvider>
+          </AuthProvider>
         </QueryProvider>
       </TamaguiProvider>
     </GestureHandlerRootView>
