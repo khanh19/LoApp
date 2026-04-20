@@ -26,11 +26,17 @@ const BORDER = "#d9d9d9";
 export interface AuthScreenProps {
   initialMode?: "signup" | "login";
   onAuthenticated: () => void;
+  /** Called when the user closes the OAuth browser without finishing (go back / cancel). */
+  onOAuthDismiss?: () => void;
+  /** Back chevron: return to auth landing (sign up and log in). */
+  onBackToEntry?: () => void;
 }
 
 export default function AuthScreen({
   initialMode = "signup",
   onAuthenticated,
+  onOAuthDismiss,
+  onBackToEntry,
 }: AuthScreenProps) {
   const [mode, setMode] = useState<"signup" | "login">(initialMode);
   const [email, setEmail] = useState("");
@@ -54,14 +60,26 @@ export default function AuthScreen({
       reset();
       try {
         const token = await authenticate(provider);
-        if (token) onAuthenticated();
+        if (token) {
+          onAuthenticated();
+          return;
+        }
+        onOAuthDismiss?.();
       } catch (e) {
-        setLocalError(
-          e instanceof Error ? e.message : "Something went wrong",
-        );
+        const msg = e instanceof Error ? e.message : String(e);
+        const lower = msg.toLowerCase();
+        if (
+          onOAuthDismiss &&
+          (lower.includes("access_denied") ||
+            lower.includes("login_required"))
+        ) {
+          onOAuthDismiss();
+          return;
+        }
+        setLocalError(msg || "Something went wrong");
       }
     },
-    [authenticate, onAuthenticated, reset],
+    [authenticate, onAuthenticated, onOAuthDismiss, reset],
   );
 
   useLayoutEffect(() => {
@@ -79,19 +97,15 @@ export default function AuthScreen({
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        {isSignup ? (
-          <View style={styles.backSpacer} />
-        ) : (
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel="Back"
-            onPress={() => setMode("signup")}
-            hitSlop={12}
-            style={styles.backBtn}
-          >
-            <Ionicons name="chevron-back" size={28} color={FG} />
-          </Pressable>
-        )}
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Back"
+          onPress={() => onBackToEntry?.()}
+          hitSlop={12}
+          style={styles.backBtn}
+        >
+          <Ionicons name="chevron-back" size={28} color={FG} />
+        </Pressable>
 
         <View style={styles.logoWrap}>
           <Image
@@ -276,10 +290,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 24,
     flexGrow: 1,
-  },
-  backSpacer: {
-    height: 28,
-    marginBottom: 20,
   },
   backBtn: {
     width: 28,
